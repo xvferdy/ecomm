@@ -25,8 +25,10 @@ class UsersRepository {
         attrs.id = this.randomId();
 
         const records = await this.getAll();
+        // console.log(records); // // memory array pertama kali dari getAll masih kosong
         records.push(attrs);
 
+        // console.log(records); // memory array sdh diisi, kalau app direstart array kembali kosong
         await this.writeAll(records);
     }
 
@@ -37,19 +39,28 @@ class UsersRepository {
     randomId() {
         return crypto.randomBytes(4).toString('hex');
     }
+
+    async getOne(id) {
+        const records = await this.getAll();
+        return records.find(record => record.id === id); //iterate masing2 index
+    }
 }
 
 const test = async () => {
     const repo = new UsersRepository('users.json');
 
-    await repo.create({
-        email: "asdad@SpeechGrammarList.com",
-        pass: "asdasd"
-    })
+    // await repo.create({
+    //     email: "asdad@SpeechGrammarList.com",
+    //     pass: "asdasd"
+    // })
 
-    const users = await repo.getAll();
+    // const users = await repo.getAll();
 
-    console.log(users);
+    // console.log(users);
+
+    const user = await repo.getOne('05a175d7');
+
+    console.log(user);
 }
 
 test();
