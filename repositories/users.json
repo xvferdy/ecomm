@@ -1,12 +1,13 @@
-[
-  {
-    "email": "asdad@SpeechGrammarList.com",
-    "pass": "asdasd",
-    "id": "09d96a1a"
+[{
+    "email": "ferdy@gmail.com",
+    "pass": "ayam",
+    "id": "c99ac48f",
+    "type": "vip"
   },
   {
-    "email": "asdad@SpeechGrammarList.com",
-    "pass": "asdasd",
-    "id": "05a175d7"
+    "email": "ferdy@gmail2222222.com",
+    "pass": "ayam222222222",
+    "id": "59c99e98",
+    "type": "reguler"
   }
 ]
