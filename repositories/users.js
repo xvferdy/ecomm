@@ -60,11 +60,29 @@ class UsersRepository {
             throw new Error(`Record with id ${id} not found`);
         }
 
-        // record === { email: 'test@gmail.com }
-        // attrs === { pass: 'mypass' }
         Object.assign(record, attrs);
-        // record === { email: 'test@gmail.com, pass: 'mypass' }
         await this.writeAll(records);
+    }
+
+    async getOneBy(filters) {
+        const records = await this.getAll();
+
+        for (let record of records) {
+            let found = true; // knp pas iterasi selanjutnya found kembali menjadi true? liat di note
+            // found = true;
+            // console.log(found + " outter");
+
+            for (let key in filters) {
+                if (record[key] !== filters[key]) {
+                    found = false;
+                }
+                // console.log(found + " inner");
+            }
+
+            if (found) {
+                return record;
+            }
+        }
     }
 }
 
@@ -84,9 +102,16 @@ const test = async () => {
 
     // await repo.delete("09d96a1a");
 
-    await repo.update("59c99e98", {
+    // await repo.update("59c99e98", {
+    //     email: "gmail22222222222222",
+    //     pass: "ayam22"
+    // });
+
+    const user = await repo.getOneBy({
+        pass: "ayam22",
         type: "reguler"
     });
+    console.log(user)
 }
 
 test();

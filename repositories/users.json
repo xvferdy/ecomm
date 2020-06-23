@@ -1,12 +1,13 @@
-[{
+[
+  {
     "email": "ferdy@gmail.com",
     "pass": "ayam",
     "id": "c99ac48f",
     "type": "vip"
   },
   {
-    "email": "ferdy@gmail2222222.com",
-    "pass": "ayam222222222",
+    "email": "gmail22222222222222",
+    "pass": "ayam22",
     "id": "59c99e98",
     "type": "reguler"
   }
