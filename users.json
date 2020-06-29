@@ -1,0 +1,20 @@
+[
+  {
+    "email": "test@test.com"
+  },
+  {
+    "email": "ferdy@gmail.com",
+    "pass": "ayam",
+    "id": "253e49b9"
+  },
+  {
+    "email": "ferdy",
+    "password": "abc",
+    "id": "cb31c3eb"
+  },
+  {
+    "email": "xx",
+    "password": "zz",
+    "id": "d7e75c5c"
+  }
+]

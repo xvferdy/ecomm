@@ -25,11 +25,12 @@ class UsersRepository {
         attrs.id = this.randomId();
 
         const records = await this.getAll();
-        // console.log(records); // // memory array pertama kali dari getAll masih kosong
-        records.push(attrs);
+        records.push(attrs); //masih di memory array belum di writeAll() ke harddrive
 
-        // console.log(records); // memory array sdh diisi, kalau app direstart array kembali kosong
         await this.writeAll(records);
+
+        // console.log(attrs);
+        return attrs;
     }
 
     // mengedit data asli pada harddrive (diambil dari memory array getAll())
@@ -86,32 +87,34 @@ class UsersRepository {
     }
 }
 
-const test = async () => {
-    const repo = new UsersRepository('users.json');
+// //>> HANYA UNTUK TES DATABASE METHOD <<
+// const test = async () => {
+//     const repo = new UsersRepository('users.json');
 
-    // await repo.create({
-    //     email: "ferdy@gmail.com",
-    //     pass: "ayam"
-    // })
+//     // await repo.create({
+//     //     email: "ferdy@gmail.com",
+//     //     pass: "ayam"
+//     // });
 
-    // const users = await repo.getAll();
-    // console.log(users);
+//     // const users = await repo.getAll();
+//     // console.log(users);
 
-    // const user = await repo.getOne('05a175d7');
-    // console.log(user);
+//     // const user = await repo.getOne('05a175d7');
+//     // console.log(user);
 
-    // await repo.delete("09d96a1a");
+//     // await repo.delete("09d96a1a");
 
-    // await repo.update("59c99e98", {
-    //     email: "gmail22222222222222",
-    //     pass: "ayam22"
-    // });
+//     // await repo.update("59c99e98", {
+//     //     email: "gmail22222222222222",
+//     //     pass: "ayam22"
+//     // });
 
-    const user = await repo.getOneBy({
-        pass: "ayam22",
-        type: "reguler"
-    });
-    console.log(user)
-}
+//     // const user = await repo.getOneBy({
+//     //     pass: "ayam22",
+//     //     type: "reguler"
+//     // });
+//     // console.log(user);
+// }
+// test();
 
-test();
+module.exports = new UsersRepository('users.json');
