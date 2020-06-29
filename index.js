@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session');
 const usersRepo = require('./repositories/users');
 
 const app = express();
@@ -7,9 +8,16 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use(
+  cookieSession({
+    keys: ['jekyll123']
+  })
+);
+
 app.get('/', (req, res) => {
   res.send(`
     <div>
+    Your id is: ${req.session.userId}
     <form method="POST">
       <input name="email" placeholder="email" />
       <input name="password" placeholder="password" />
@@ -47,13 +55,13 @@ app.post('/', async (req, res) => {
     email: email,
     password: password
   });
-  console.log(user);
+  // console.log(user);
 
   // Store the id of that user inside the users cookie
+  req.session.userId = user.id;
+
   res.send('Account Created!');
 });
-
-
 
 //terminal
 app.listen(3000, () => {
