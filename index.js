@@ -14,7 +14,8 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
+// Sign Up request
+app.get('/signup', (req, res) => {
   res.send(`
     <div>
     Your id is: ${req.session.userId}
@@ -28,8 +29,8 @@ app.get('/', (req, res) => {
     `);
 });
 
-// Sign Up
-app.post('/', async (req, res) => {
+// Sign Up POST request
+app.post('/signup', async (req, res) => {
   // console.log(req.body);
 
   const {
@@ -55,12 +56,58 @@ app.post('/', async (req, res) => {
     email: email,
     password: password
   });
-  // console.log(user);
+  // console.log(user);  // user dalam bentuk record object
 
   // Store the id of that user inside the users cookie
   req.session.userId = user.id;
 
   res.send('Account Created!');
+});
+
+//Sign Out request
+app.get('/signout', (req, res) => {
+  req.session = null;
+  res.send('You are Logged Out');
+});
+
+//Sign In request
+app.get('/signin', (req, res) => {
+  res.send(`
+  <div>
+  Your id is: ${req.session.userId}
+  <form method="POST">
+    <input name="email" placeholder="email" />
+    <input name="password" placeholder="password" />
+    <button>Sign In</button>
+  </form>
+</div>
+  `);
+});
+
+//Sign In POST request
+app.post(`/signin`, async (req, res) => {
+  const {
+    email,
+    password
+  } = req.body
+
+  //validasi email
+  const user = await usersRepo.getOneBy({
+    email: email
+  });
+
+  if (!user) {
+    return res.send('Email not found');
+  }
+
+  //validasi password
+  if (password !== user.password) {
+    return res.send('Wrong password');
+  }
+
+  //set cookie session
+  req.session.userId = user.id;
+  res.send(`You are sign in! user with id ${req.session.userId}`);
 });
 
 //terminal

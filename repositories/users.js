@@ -93,7 +93,7 @@ class UsersRepository {
 
 //     // await repo.create({
 //     //     email: "ferdy@gmail.com",
-//     //     pass: "ayam"
+//     //     password: "ayam"
 //     // });
 
 //     // const users = await repo.getAll();
