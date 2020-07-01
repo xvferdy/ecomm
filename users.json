@@ -31,5 +31,20 @@
     "email": "jack2",
     "password": "jack2",
     "id": "47866014"
+  },
+  {
+    "email": "asd",
+    "password": "asd",
+    "id": "34737c2e"
+  },
+  {
+    "email": "hashsalt",
+    "password": "7f408f5d3cd7d9d81d7317be37480b4ddcde91ec2ef3e7c69c66a380ab9a94b3dda69f71b2e5c3ac5ff247e4c68f282aff281acc8ed82210c9097030d372cffb.e6a81c99663cb189",
+    "id": "0a5a3ff0"
+  },
+  {
+    "email": "baru1",
+    "password": "e28058733fbe5ab2a5233487a4ed307fd20b6003f20e499aad1852c2720f7543d1ee1ed2a489be036f66084c7fb54e07974addcfc7864979af43e2728ddb93a1.780608a129bcdd44",
+    "id": "aaa83297"
   }
 ]
