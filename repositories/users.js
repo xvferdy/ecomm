@@ -34,13 +34,22 @@ class UsersRepository {
         const records = await this.getAll();
         const record = {
             ...attrs,
-            password: `${buf.toString('hex')}.${salt}`
+            password: `${buf.toString('hex')}.${salt}` //overwrite password asli user dengan password hash+salt.salt
         }
         records.push(record); //masih di memory array belum di writeAll() ke harddrive
 
         await this.writeAll(records);
 
         return record;
+    }
+
+    async comparePassword(saved, supplied) {
+        // Saved -> password saved in our database, hashed.salt
+        // supplied -> password given to us by a user trying sign in
+        const [hashed, salt] = saved.split('.');
+        const hashedSuppliedBuf = await scrypt(supplied, salt, 64);
+
+        return hashed === hashedSuppliedBuf.toString('hex');
     }
 
     // mengedit data asli pada harddrive (diambil dari memory array getAll())

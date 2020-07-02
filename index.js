@@ -85,7 +85,7 @@ app.get('/signin', (req, res) => {
 });
 
 //Sign In POST request
-app.post(`/signin`, async (req, res) => {
+app.post('/signin', async (req, res) => {
   const {
     email,
     password
@@ -101,7 +101,8 @@ app.post(`/signin`, async (req, res) => {
   }
 
   //validasi password
-  if (password !== user.password) {
+  const validPassword = await usersRepo.comparePassword(user.password, password);
+  if (!validPassword) {
     return res.send('Wrong password');
   }
 
