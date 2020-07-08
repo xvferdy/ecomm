@@ -21,12 +21,11 @@ router.post('/signup', [ requireEmail, requirePassword, requirePasswordConfirmat
 	const errors = validationResult(req);
 	console.log(errors);
 
-	//validasi
+	if (!errors.isEmpty()) {
+		return res.send(signupTemplate({ req: req, errors }));
+	}
+
 	const { email, password, passwordConfirmation } = req.body;
-
-	//validasi email
-
-	//validasi password
 
 	// Create a user in our user repo to represent this person
 	const user = await usersRepo.create({
