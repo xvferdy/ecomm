@@ -8,7 +8,7 @@ module.exports = {
 		.isEmail()
 		.withMessage('Must be a valid email address')
 		.custom(async (email) => {
-			const existingUser = await usersRepo.getOneBy({ email });
+			const existingUser = await usersRepo.getOneBy({ email: email });
 			if (existingUser) {
 				throw new Error('Email sudah digunakan!');
 			}
@@ -24,9 +24,8 @@ module.exports = {
 		.custom((passwordConfirmation, { req }) => {
 			if (passwordConfirmation !== req.body.password) {
 				throw new Error('Password must match!');
+			} else {
+				return true;
 			}
-			// else {
-			// 	return true;
-			// }
 		})
 };

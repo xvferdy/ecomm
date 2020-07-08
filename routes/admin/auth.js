@@ -52,27 +52,47 @@ router.get('/signin', (req, res) => {
 });
 
 //Sign In POST request
-router.post('/signin', async (req, res) => {
-	const { email, password } = req.body;
+router.post(
+	'/signin',
+	[
+		check('email')
+			.trim()
+			.normalizeEmail()
+			.isEmail()
+			.withMessage('Must provide a valid email')
+			.custom(async (email) => {
+				const user = await usersRepo.getOneBy({ email: email });
+				if (!user) {
+					throw new Error('Email not found');
+				}
+			}),
+		check('password').trim()
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		console.log(errors);
 
-	//validasi email
-	const user = await usersRepo.getOneBy({
-		email: email
-	});
+		const { email, password } = req.body;
 
-	if (!user) {
-		return res.send('Email not found');
+		//validasi email
+		const user = await usersRepo.getOneBy({
+			email: email
+		});
+
+		if (!user) {
+			return res.send('Email not found');
+		}
+
+		//validasi password
+		const validPassword = await usersRepo.comparePassword(user.password, password);
+		if (!validPassword) {
+			return res.send('Wrong password');
+		}
+
+		//set cookie session
+		req.session.userId = user.id;
+		res.send(`You are sign in! user with id ${req.session.userId}`);
 	}
-
-	//validasi password
-	const validPassword = await usersRepo.comparePassword(user.password, password);
-	if (!validPassword) {
-		return res.send('Wrong password');
-	}
-
-	//set cookie session
-	req.session.userId = user.id;
-	res.send(`You are sign in! user with id ${req.session.userId}`);
-});
+);
 
 module.exports = router;
