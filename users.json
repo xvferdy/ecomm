@@ -1,12 +1,22 @@
 [
-	{
-		"email": "baru5@gmail.com",
-		"password": "8c0d75098a9a8caa43c091b4311b35064741a38e16392e0ba3819f860ba035ef904dbd32255a764856fa27f578835c298476d896586dd02e3ee3c8421ce197e9.edb53de6692944fd",
-		"id": "6ccded02"
-	},
-	{
-		"email": "baru6@gmail.com",
-		"password": "586ae7bb42d73cc08bc43960bed676ff709651887ac19b5d8abd146d4d56037baecf6c4352f02c16380c30af8b91eb9e9464e646c1ca16919760ecc399c3f37f.80ca464a861db766",
-		"id": "50f3f28f"
-	}
+  {
+    "email": "baru5@gmail.com",
+    "password": "8c0d75098a9a8caa43c091b4311b35064741a38e16392e0ba3819f860ba035ef904dbd32255a764856fa27f578835c298476d896586dd02e3ee3c8421ce197e9.edb53de6692944fd",
+    "id": "6ccded02"
+  },
+  {
+    "email": "baru6@gmail.com",
+    "password": "586ae7bb42d73cc08bc43960bed676ff709651887ac19b5d8abd146d4d56037baecf6c4352f02c16380c30af8b91eb9e9464e646c1ca16919760ecc399c3f37f.80ca464a861db766",
+    "id": "50f3f28f"
+  },
+  {
+    "email": "baru7@gmail.com",
+    "password": "d34711547711fc2fce5025d83d985bcb08ac3ed9697a30858aad6337cd10f31f337b1af5efc73781d538ed4ba42c0ab49915fc6ef535859aa2c577c90e0951ec.ab32e5703fb3bbca",
+    "id": "a8bc3a2e"
+  },
+  {
+    "email": "baru8@gmail.com",
+    "password": "f28c36196a916432654bbb7f78225eb8cd598b27659b3f5d5e071ba9e5c2f555cfbfee6186e2264d681540f1f17402b13d0f68221c62d05ad11ee566daef6183.567f37f05a4d20cd",
+    "id": "a317c1c5"
+  }
 ]
