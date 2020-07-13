@@ -7,3 +7,15 @@ module.exports = {
 		}
 	}
 };
+
+// errors.mapped() === {
+// 		email: {
+// 			msg: 'Invalid Email'
+// 		},
+// 		password: {
+// 			msg: 'Password too short'
+// 		},
+// 		passwordConfirmation: {
+// 			msg: 'Password must match'
+// 		}
+// 	}

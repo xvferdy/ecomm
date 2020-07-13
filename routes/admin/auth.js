@@ -17,7 +17,7 @@ const router = express.Router();
 
 // Sign Up request (show signup html)
 router.get('/signup', (req, res) => {
-	res.send(signupTemplate({ req: req }));
+	res.send(signupTemplate({ req: req })); //isi destruct kosong {} juga tidak apa2
 });
 
 // Sign Up POST request
@@ -28,7 +28,7 @@ router.post('/signup', [ requireEmail, requirePassword, requirePasswordConfirmat
 	console.log(errors);
 
 	if (!errors.isEmpty()) {
-		return res.send(signupTemplate({ req: req, errors }));
+		return res.send(signupTemplate({ req: req, errors })); //pass errors
 	}
 
 	const { email, password, passwordConfirmation } = req.body;
@@ -73,7 +73,7 @@ router.post('/signin', [ requireEmailExist, requireValidPasswordForUser ], async
 	});
 
 	//set cookie session
-	req.session.userId = user.id;
+	req.session.userId = user.id; //userId / beri nama apa saja
 	res.send(`You are sign in! user with id ${req.session.userId}`);
 });
 
