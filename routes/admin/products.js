@@ -17,11 +17,15 @@ router.get('/admin/products/new', (req, res) => {
 });
 
 // New product POST request
-router.post('/admin/products/new', [ requireTitle, requirePrice ], upload.single('image'), (req, res) => {
+router.post('/admin/products/new', [ requireTitle, requirePrice ], upload.single('image'), async (req, res) => {
 	const errors = validationResult(req);
 	// console.log(errors);
 
 	// console.log(req.file);
+	const image = req.file.buffer.toString('base64');
+	const { title, price } = req.body;
+
+	await productsRepo.create({ title: title, price: price, image: image }); //save ke products.json
 
 	res.send('Submitted');
 });
