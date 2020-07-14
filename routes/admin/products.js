@@ -17,9 +17,13 @@ router.get('/admin/products/new', (req, res) => {
 });
 
 // New product POST request
-router.post('/admin/products/new', [ requireTitle, requirePrice ], upload.single('image'), async (req, res) => {
+router.post('/admin/products/new', upload.single('image'), [ requireTitle, requirePrice ], async (req, res) => {
 	const errors = validationResult(req);
-	// console.log(errors);
+	console.log(errors);
+
+	if (!errors.isEmpty()) {
+		return res.send(productsNewTemplate({ errors }));
+	}
 
 	// console.log(req.file);
 	const image = req.file.buffer.toString('base64');
