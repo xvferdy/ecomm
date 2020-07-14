@@ -20,14 +20,13 @@ router.get('/admin/products/new', (req, res) => {
 router.post('/admin/products/new', upload.single('image'), [ requireTitle, requirePrice ], async (req, res) => {
 	const errors = validationResult(req);
 	console.log(errors);
-
+	const { title, price } = req.body;
 	if (!errors.isEmpty()) {
-		return res.send(productsNewTemplate({ errors }));
+		return res.send(productsNewTemplate({ errors }, title.replace(' ', ' '))); //itu bukan spasi tapi whitespace dari character map
 	}
 
 	// console.log(req.file);
 	const image = req.file.buffer.toString('base64');
-	const { title, price } = req.body;
 
 	await productsRepo.create({ title: title, price: price, image: image }); //save ke products.json
 

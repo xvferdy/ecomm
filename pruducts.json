@@ -1,12 +1,12 @@
 [
-  {
-    "title": "inca fire",
-    "price": "10",
-    "id": "7b414205"
-  },
-  {
-    "title": "ayam kampung",
-    "price": 100000,
-    "id": "e9524bfd"
-  }
+	{
+		"title": "inca fire",
+		"price": "10",
+		"id": "7b414205"
+	},
+	{
+		"title": "ayam kampung",
+		"price": 100000,
+		"id": "e9524bfd"
+	}
 ]
