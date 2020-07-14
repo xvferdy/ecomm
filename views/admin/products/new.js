@@ -3,6 +3,7 @@ const { getError } = require('../../helpers');
 
 module.exports = ({ errors }, title) => {
 	// console.log(title);
+	// kenapa tidak bisa .replace disini
 
 	return layout({
 		content: `
