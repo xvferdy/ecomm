@@ -7,8 +7,6 @@ module.exports = ({ errors }, title) => {
 
 	return layout({
 		content: `
-        <h1 class="subtitle">${title}</h1>
-        <button class="button is-primary">${title}</button>
       <div class="columns is-centered">
         <div class="column is-half">
           <h1 class="subtitle">Create a Product</h1>
@@ -16,7 +14,7 @@ module.exports = ({ errors }, title) => {
           <form method="POST" enctype="multipart/form-data">
             <div class="field">
               <label class="label">Title</label>
-              <input class="input" placeholder="Title" name="title" value=${title}>
+              <input class="input" placeholder="Title" name="title" value="">
               <p class="help is-danger">${getError(errors, 'title')}</p>
             </div>
             

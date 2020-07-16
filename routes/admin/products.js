@@ -1,10 +1,10 @@
 const express = require('express');
-const { validationResult } = require('express-validator');
 const multer = require('multer');
 
 const productsRepo = require('../../repositories/products');
 const productsNewTemplate = require('../../views/admin/products/new');
 const { requireTitle, requirePrice } = require('./validators');
+const { handleErrors } = require('./middlewares');
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -17,20 +17,19 @@ router.get('/admin/products/new', (req, res) => {
 });
 
 // New product POST request
-router.post('/admin/products/new', upload.single('image'), [ requireTitle, requirePrice ], async (req, res) => {
-	const errors = validationResult(req);
-	console.log(errors);
-	const { title, price } = req.body;
-	if (!errors.isEmpty()) {
-		return res.send(productsNewTemplate({ errors }, title.replace(' ', ' '))); //itu bukan spasi tapi whitespace dari character map
+router.post(
+	'/admin/products/new',
+	upload.single('image'),
+	[ requireTitle, requirePrice ],
+	handleErrors(productsNewTemplate),
+	async (req, res) => {
+		// const image = req.file.buffer.toString('base64'); //debug tanpa image dlu
+		const { title, price } = req.body;
+		await productsRepo.create({ title: title, price: price }); //debug tanpa image dlu
+		// await productsRepo.create({ title: title, price: price, image: image }); //save ke products.json
+
+		res.send('Submitted');
 	}
-
-	// console.log(req.file);
-	const image = req.file.buffer.toString('base64');
-
-	await productsRepo.create({ title: title, price: price, image: image }); //save ke products.json
-
-	res.send('Submitted');
-});
+);
 
 module.exports = router;
