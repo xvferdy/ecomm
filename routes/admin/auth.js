@@ -27,7 +27,7 @@ router.post(
 	async (req, res) => {
 		// console.log(req.body);
 
-		const { email, password, passwordConfirmation } = req.body;
+		const { email, password } = req.body;
 
 		// Create a user in our user repo to represent this person
 		const user = await usersRepo.create({
@@ -39,7 +39,7 @@ router.post(
 		// Store the id of that user inside the users cookie
 		req.session.userId = user.id;
 
-		res.send('Account Created!');
+		res.redirect('/admin/products/');
 	}
 );
 
@@ -68,7 +68,7 @@ router.post(
 
 		//set cookie session
 		req.session.userId = user.id; //userId / beri nama apa saja
-		res.send(`You are sign in! user with id ${req.session.userId}`);
+		res.redirect('/admin/products/');
 	}
 );
 

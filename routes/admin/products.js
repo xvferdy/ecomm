@@ -3,24 +3,32 @@ const multer = require('multer');
 
 const productsRepo = require('../../repositories/products');
 const productsNewTemplate = require('../../views/admin/products/new');
-const { requireTitle, requirePrice } = require('./validators');
-const { handleErrors } = require('./middlewares');
+const productsIndexTemplate = require('../../views/admin/products/index');
+const productEditTemplate = require('../../views/admin/products/edit');
+const { requireTitle, requirePrice, requireImage } = require('./validators');
+const { handleErrors, requireAuth } = require('./middlewares');
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
-router.get('/admin/products', (req, res) => {});
+// products listing (show products html)
+router.get('/admin/products', requireAuth, async (req, res) => {
+	const products = await productsRepo.getAll();
+
+	res.send(productsIndexTemplate({ products: products }));
+});
 
 // New product request (show New product html)
-router.get('/admin/products/new', (req, res) => {
+router.get('/admin/products/new', requireAuth, (req, res) => {
 	res.send(productsNewTemplate({}));
 });
 
 // New product POST request
 router.post(
 	'/admin/products/new',
+	requireAuth,
 	upload.single('image'),
-	[ requireTitle, requirePrice ],
+	[ requireTitle, requirePrice, requireImage ],
 	handleErrors(productsNewTemplate),
 	async (req, res) => {
 		// const image = req.file.buffer.toString('base64'); //debug tanpa image dlu
@@ -28,8 +36,20 @@ router.post(
 		await productsRepo.create({ title: title, price: price }); //debug tanpa image dlu
 		// await productsRepo.create({ title: title, price: price, image: image }); //save ke products.json
 
-		res.send('Submitted');
+		res.redirect('/admin/products/');
 	}
 );
+
+router.get('/admin/products/:id/edit', requireAuth, async (req, res) => {
+	// console.log(req.params.id);
+	const product = await productsRepo.getOne(req.params.id);
+
+	if (!product) {
+		res.send('Product not found');
+	}
+	res.send(productEditTemplate({ product: product }));
+});
+
+router.post('/admin/products/:id/edit', requireAuth, async (req, res) => {});
 
 module.exports = router;
