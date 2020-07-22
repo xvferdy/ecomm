@@ -28,20 +28,20 @@ router.post(
 	'/admin/products/new',
 	requireAuth,
 	upload.single('image'),
-	// [ requireTitle, requirePrice, requireImage ],
+	// [ requireTitle, requirePrice, requireImage ], //debug tanpa image dlu
 	[ requireTitle, requirePrice ],
 	handleErrors(productsNewTemplate),
 	async (req, res) => {
 		// const image = req.file.buffer.toString('base64'); //debug tanpa image dlu
 
+		//save ke products.json
 		const { title, price } = req.body;
 		await productsRepo.create({ title: title, price: price }); //debug tanpa image dlu
+		// await productsRepo.create({ title: title, price: price, image: image });  //debug tanpa image dlu
 
 		// fashion way
 		// const newProduct = req.body;
 		// await productsRepo.create(newProduct);
-
-		// await productsRepo.create({ title: title, price: price, image: image }); //save ke products.json
 
 		res.redirect('/admin/products/');
 	}
