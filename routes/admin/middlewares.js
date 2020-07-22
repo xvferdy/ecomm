@@ -1,15 +1,19 @@
 const { validationResult } = require('express-validator');
 
 module.exports = {
-	handleErrors(templateFunc) {
-		return (req, res, next) => {
+	handleErrors(templateFunc, dataCb) {
+		return async (req, res, next) => {
 			const errors = validationResult(req);
-			// console.log(errors);
+			console.log(errors);
 
-			const { title, price } = req.body; //:poop:
 			if (!errors.isEmpty()) {
-				// return res.send(templateFunc({ errors }, title.replace(' ', ' '))); //itu bukan spasi tapi whitespace dari character map :poop:
-				return res.send(templateFunc({ errors }, title));
+				let data = {};
+
+				if (dataCb) {
+					data = await dataCb(req);
+				}
+				// console.log(data); //{product: { title: 'inca fire', price: 1, id: '7b414205', image: '' }}
+				return res.send(templateFunc({ errors, ...data }));
 			}
 			next();
 		};

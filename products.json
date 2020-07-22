@@ -1,22 +1,24 @@
 [
   {
     "title": "inca fire",
-    "price": "10",
-    "id": "7b414205"
+    "price": 11,
+    "id": "7b414205",
+    "image": ""
   },
   {
     "title": "ayam kampung",
-    "price": 100000,
-    "id": "e9524bfd"
+    "price": 77,
+    "id": "e9524bfd",
+    "image": ""
   },
   {
     "title": "undefined",
-    "price": 1,
+    "price": 11,
     "id": "bed0106c"
   },
   {
     "title": "ayam2",
-    "price": 1,
+    "price": 2,
     "id": "18dd6e66"
   },
   {
@@ -29,5 +31,10 @@
     "title": "redirect",
     "price": 1,
     "id": "c33138b2"
+  },
+  {
+    "title": "change",
+    "price": 100,
+    "id": "b9818137"
   }
 ]
