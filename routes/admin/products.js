@@ -66,7 +66,7 @@ router.post(
 	[ requireTitle, requirePrice ],
 	handleErrors(productEditTemplate, async (req) => {
 		const product = await productsRepo.getOne(req.params.id);
-		console.log(product); //{ title: 'inca fire', price: 77, id: '7b414205', image: '' }
+		// console.log(product); //{ title: 'inca fire', price: 77, id: '7b414205', image: '' }
 		return { product: product };
 	}),
 	async (req, res) => {
