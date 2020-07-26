@@ -8,7 +8,7 @@ router.post('/cart/products', async (req, res) => {
 	let cart;
 	if (!req.session.cartId) {
 		// We dont have cart, need to create one & make new session
-		cart = await cartsRepo.create({ item: [] });
+		cart = await cartsRepo.create({ items: [] });
 		req.session.cartId = cart.id;
 	} else {
 		// We have cart, lets get it from repository
@@ -16,6 +16,7 @@ router.post('/cart/products', async (req, res) => {
 	}
 
 	console.log(cart);
+
 	// Either increment quantity for existing product
 	// Or add new product
 
