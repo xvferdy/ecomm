@@ -24,6 +24,7 @@ module.exports = class Repository {
 		return attrs;
 	}
 
+	//will return an array of object
 	async getAll() {
 		return JSON.parse(
 			await fs.promises.readFile(this.filename, {
