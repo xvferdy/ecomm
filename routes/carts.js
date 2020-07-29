@@ -39,6 +39,7 @@ router.post('/cart/products', async (req, res) => {
 // Receive a GET request to show all items in cart
 router.get('/cart', async (req, res) => {
 	if (!req.session.cartId) {
+		console.log('>>>> No Sesion! <<<<');
 		res.redirect('/');
 	}
 
@@ -46,7 +47,7 @@ router.get('/cart', async (req, res) => {
 
 	for (let item of cart.items) {
 		const product = await productRepo.getOne(item.id);
-		item.product = product;
+		item.product = product; //buat properti baru, nama product
 	}
 
 	res.send(cartShowTemplate({ items: cart.items }));
