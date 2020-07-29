@@ -9,7 +9,8 @@ router.post('/cart/products', async (req, res) => {
 	// console.log(req.body); //{ productId: '62b582ba' }
 
 	// Figure out the cart
-	let cart;
+	let cart; //menampung variabel cart
+
 	if (!req.session.cartId) {
 		// We dont have cart, need to create one & make new session
 		cart = await cartsRepo.create({ items: [] });
@@ -54,5 +55,9 @@ router.get('/cart', async (req, res) => {
 });
 
 // Receive a POST request to delete an item from cart
+router.post('/cart/products/delete', async (req, res) => {
+	console.log(req.body);
+	// await cartsRepo.delete(req.body.itemId);
+});
 
 module.exports = router;
